@@ -97,8 +97,9 @@ function initChat() {
     arpFooter.id = 'arpFooter';    
     arpFooter.textContent = 'arpanetos.lol';   
     arpFooter.style.backgroundColor = "black";
-    arpFooter.style.color = "white"
-    arpFooter.style.backgroundColor = "rgb(51, 51, 51)";
+    arpFooter.style.color = "black"
+    arpFooter.style.backgroundColor = '#cacccf';
+   // '#cacccf' : '#333333';
     arpFooter.style.textAlign = "center"
     arpFooter.style.padding = "15px"
     arpFooter.style.fontFamily = 'Arial, sans-serif';
