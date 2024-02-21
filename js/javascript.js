@@ -16,11 +16,13 @@ function initChat() {
         <input type="checkbox" id="theme-toggle">
         <span>Dark Mode</span>
     `;
+    themeToggle.id = 'themeToggle';
+    themeToggle.style.fontFamily = "Arial, sans-serif";
+    themeToggle.style.position = 'center';
     document.body.appendChild(themeToggle);
     
     const themeToggleInput = document.getElementById('theme-toggle');
-    themeToggle.style.fontFamily = "Arial, sans-serif";
-    themeToggle.style.position = 'flex';
+    
     themeToggleInput.addEventListener('change', function() {
         if (this.checked) {
             theme('dark');
@@ -44,7 +46,6 @@ function initChat() {
     messagesContainer.style.borderRadius = '3px';
     messagesContainer.style.border = '3px solid #e0e0e0';
     messagesContainer.style.fontFamily = ' Arial, sans-serif';
-    messagesContainer.style.backgroundColor = "lightblue";
     
     const list = document.createElement('ul')
     messagesContainer.appendChild(list)
@@ -58,25 +59,35 @@ function initChat() {
 
 
     const button = document.createElement('button');
+    button.id = 'button';
     button.type = 'button';
     button.textContent = 'Send';
     button.style.width = '15%';
     button.style.height = '10vh';
     button.style.position = 'fixed';
-    button.style.borderColor = '#333333';
-    button.style.backgroundColor = 'lightblue';
-    button.style.color = "black"
     button.style.alignItems = "right"
 
     button.addEventListener('click', postMessage);
 
     button.addEventListener('mousedown', function() {
-        this.style.backgroundColor = "rgb(51, 51, 51)";
-        this.style.color = "white"
+        if (!themeToggleInput.checked){
+            this.style.backgroundColor = "#333333";
+            this.style.color = "white"
+        }
+        else {
+            this.style.backgroundColor = 'lightblue'
+            this.style.color = "black"
+        }
     });
     button.addEventListener('mouseup', function() {
-        this.style.backgroundColor = 'lightblue';
-        this.style.color = "black"
+        if (!themeToggleInput.checked){
+            this.style.backgroundColor = '#cacccf'
+            this.style.color = "black"
+        }
+        else {
+            this.style.backgroundColor = "rgb(51, 51, 51)";
+            this.style.color = "white"
+        }
     });
 
     const sendContainer = document.createElement("div");
@@ -96,10 +107,6 @@ function initChat() {
     const arpFooter = document.createElement('p');
     arpFooter.id = 'arpFooter';    
     arpFooter.textContent = 'arpanetos.lol';   
-    arpFooter.style.backgroundColor = "black";
-    arpFooter.style.color = "black"
-    arpFooter.style.backgroundColor = '#cacccf';
-   // '#cacccf' : '#333333';
     arpFooter.style.textAlign = "center"
     arpFooter.style.padding = "15px"
     arpFooter.style.fontFamily = 'Arial, sans-serif';
@@ -138,31 +145,32 @@ async function postMessage() {
 }
 
 function theme(theme){    
-    const body = document.body;
     const messagesContainer = document.getElementById('messagesContainer');
     const arpHeader = document.getElementById('arpHeader');
-    const themeToggleInput = document.getElementById('themeToggle');
+    const themeToggle = document.getElementById('themeToggle');
     const arpFooter = document.getElementById('arpFooter');
     const button = document.getElementById('button');
 
     const lightMode = theme === 'light';
     
-    body.style.backgroundColor = lightMode ? '#9cb3d6' : '#0C2238';
+    document.body.style.backgroundColor = lightMode ? '#9cb3d6' : '#0C2238';
 
     arpHeader.style.backgroundColor = lightMode ? '#cacccf' : '#333333';
     arpHeader.style.color = lightMode ? 'black' : 'white';
-
-    themeToggleInput.style.color = lightMode ? 'black' : 'white';
- 
+    
     arpFooter.style.backgroundColor = lightMode ? '#cacccf' : '#333333';
     arpFooter.style.color = lightMode ? 'black' : 'white';
- 
+
     messagesContainer.style.backgroundColor = lightMode ? '#cacccf' : 'lightblue';
     messagesContainer.style.color = lightMode ? 'black' : 'black';
+    messagesContainer.style.borderColor = lightMode ? '#333333' : '#cacccf';
 
     button.style.backgroundColor = lightMode ? '#cacccf' : '#333333';
-    button.style.borderColor = lightMode ? '#cacccf' : '#333333';
+    button.style.borderColor = lightMode ? '#333333' : '#cacccf';
+    button.style.color = lightMode ? 'black' : 'white';
 
+    themeToggle.style.color = lightMode ? 'black' : 'white';
+ 
     localStorage.setItem('theme', theme);
 }
 
